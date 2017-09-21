@@ -1,0 +1,76 @@
+<div class="page-header">
+    <h1><a href="#/">Reports</a></h1>
+</div>
+
+<form class="form-inline">
+  <div class="form-group"> 
+    <label>Search</label>
+    <input type="text" ng-model="searchText" class="form-control" placeholder="search">
+  </div>
+</form>
+
+<div class="row">
+    <div class="scroller">
+        <table class="table">
+            <thead>
+              <tr>
+                <th></th>
+                <th ng-click="sort('name')">Name
+                    <span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>    
+                </th>
+                <th ng-click="sort('title')">title
+                    <span class="glyphicon sort-icon" ng-show="sortKey=='title'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>    
+                </th>
+                <th ng-click="sort('cellPhone')">Phone
+                    <span class="glyphicon sort-icon" ng-show="sortKey=='cellPhone'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>    
+                </th>
+                <th ng-click="sort('email')">Email
+                    <span class="glyphicon sort-icon" ng-show="sortKey=='email'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>    
+                </th>
+                <th ng-click="sort('manager')">Manager
+                    <span class="glyphicon sort-icon" ng-show="sortKey=='manager'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>    
+                </th>
+                <th ng-click="sort('name')">Direct Report(s)
+                    <span class="glyphicon sort-icon" ng-show="sortKey=='dirReports.length'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>    
+                </th>
+                <th>Edit</th>
+              </tr>
+            </thead>
+            <tbody class="">
+            <tr ng-repeat="employee in employees | filter : searchText" class="">
+                <td>
+                    <a href="#/{{employee._id}}">
+                        <img class="thumb media-object" ng-src="/images/uploads/{{employee.name.replace(' ', '')}}.png" alt="Employee Image">
+                    </a>
+                </td>
+                <td>
+                    <p><a href="#/{{employee._id}}">{{employee.name}}</a></p>
+                </td>
+                <td>
+                    <p>{{employee.title}}</p>
+                </td>
+                <td>
+                    <p>{{employee.cellPhone}}
+                    <a href="tel:{{employee.cellPhone}}"><span class="glyphicon glyphicon-phone action-btn"></span></a></p>
+                </td>
+                <td>
+                    <p>{{employee.email}}
+                    <a href="mailto:{{employee.email}}"><span class="glyphicon glyphicon-envelope action-btn"></span></a></p>
+                </td>
+                <td>
+                    <p><a href="#/{{employee.managerObj._id}}">{{employee.managerObj.name}}</a></p>
+                </td>
+                <td>
+                    <p class=""><a href="#/{{employee._id}}/reports" ng-click="viewDetail(employee)">{{employee.dirReports.length}}</a></p>
+                </td>
+                <td>
+                    <i class="fa fa-pencil-square-o"></i><a href="#/{{ employee._id }}">Edit</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<a class="btn btn-success" href="#/">
+    <i class="fa fa-user fa-fw"></i>Go Back</a>

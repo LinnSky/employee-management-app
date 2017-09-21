@@ -1,0 +1,69 @@
+<div class="page-header">
+    <h1><a href="#/">Edit Employee</a></h1>
+</div>
+
+
+<a class="btn btn-success" href="#/">
+<i class="fa fa-undo" aria-hidden="true"></i> Go Back</a><br><br>
+
+<div class="employee_img" align="center">
+    <img alt="Employee Pic" ng-src="/images/uploads/{{employee.name.replace(' ', '')}}.png" class="img-responsive">
+</div>
+<br>
+
+<form name="newForm" class="" role="form">
+                <div class="form-group">
+                    <label class="">Name:</label>
+                    <div>
+                        <input type="text" class="form-control" name="fullname" ng-model="employee.name" placeholder="Enter Name" required>
+                        <i ng-show="newForm.fullname.$error.required"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="">Title:</label>
+                    <div>
+                        <input type="text" class="form-control" name="employeeTitle" ng-model="employee.title" placeholder="Enter Title" required>
+                        <i ng-show="newForm.employeeTitle.$error.required"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="">Phone:</label>
+                    <div>
+                        <input class="form-control" type="text" ng-model="employee.cellPhone"  placeholder="Enter Cell Phone">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="" for="email">Email:</label>
+                    <div>
+                        <input type="email" class="form-control" id="email" ng-model="employee.email" placeholder="Enter email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="">Manager:</label>
+                    <div>
+                        <select class="form-control" ng-model="employee.manager">
+                            <option ng-repeat="employee in employees">{{employee.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="">Upload Image:</label>
+                    <div>
+                        <button class="btn btn-warning" type="file" ngf-select="uploadFiles($file, $invalidFiles)"
+                                accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+                            Select File</button>
+                        <br>
+
+                        <div ng-show="f.progress >= 0">
+                            <div class="percent">File selected: {{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="">
+                        <button class="btn btn-primary" ng-click="updateEmployee()"><i class="fa fa-cloud" aria-hidden="true"></i> Save</button>
+                        <button class="btn btn-danger" ng-click="deleteProfile()"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                    </div>
+                </div>
+</form>
+
